@@ -1,0 +1,14 @@
+Nicholas Taylor
+/*****************************************************************DESIGN DOCUMENT****************************************************************/
+/*Classes and how their used*/
+	In my design for this project I use three classes: OpcodeTable, ASMDecodeParser, Instruction, and RegisterTable. 
+	The class ASMDecodeParser is used for the actual decoding of the MIPS encoded instructions, checking if its format is correct and accessing the instructions. The ASMDecodeParser class is used primarily for parsing the encoded instructions with the methods parseIType,parseJType,parseRType, and many other helper methods used to decode. Each of these methods are private, however the three public methods; decode, the constructor, and getNextInstruction are all used in my main class. The constuctor takes in the file with the MIPS assembly code and then stores it into an vector of instructions after it has been encoded and decoded using the Instruction class mutator methods. Then using the getNextInstruction method the main function is allowed to get all the instructions from the file. The instruction class provides an internal representation for a MIPS assembly instruction. In the instruction class I have accessor methods for its opcode, rs, rd, rt, imm, and immediateAddress. This allows when using the ASMDecodeParser class to once the file has been verified to use an instruction to access the encoding and decoding of the string and also its contents. The RegisterTable class I just used to return the Register typedef for ints when using the instruction class. Finally the OpcodeTable class represents templates for supported MIPS instructions. This includes information about the opcode, expected operands, and other fields. Using this class provided the ASMDecodeParser class to when decoding the instructions access important information from the table to figure out and identify the instruction then once that knowledge is obtained to figure which parsing method to use.  
+
+/*Meshing the classes*/
+
+  My ASM main class then uses an ASMDecodeParser object and Instruction object. The parser object then calls its constructor to verify the file and instructions and to init the instructions. Then using the Instruction object I access each of the instructions using the getNextInstruction method and call the accessor methods for getEncoding and getDecoding until the instruction is UNDEFINED.
+
+
+
+/*Modifying code*/
+	In order to modify the code in adding new MIPS instructions all you would have to do is in the OpcodeTable class add into the enum of Opcodes of OpcodeTableEntries the instruction you would like to add. Then in the OpcodeTable constructor add the information about the particular instruction that is provided within the class. Once you enter all of the information about the instruction (i.e name, op_field, instType, etc...) the program should then be able to know how to decode that type of encoded instruction as well. 
